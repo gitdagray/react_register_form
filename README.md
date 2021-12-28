@@ -6,7 +6,7 @@
 
 This repository shares the code applied during the [YouTube Tutorial](https://youtu.be/brcHK3P6ChQ). 
 
-Build the backend REST API I test this registration form with in my [7 hour Node JS for Beginners course](https://youtu.be/f2EqECiTBL8) on my channel.
+Build the backend REST API that I test this registration form with in my [7 hour Node JS for Beginners course](https://youtu.be/f2EqECiTBL8) on my channel.
 
 Just starting with React? I have a [9 hour React course tutorial video](https://youtu.be/RVFAyFWO4go) on my channel.  
 
