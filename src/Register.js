@@ -3,7 +3,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from './api/axios';
 
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
@@ -64,7 +64,11 @@ const Register = () => {
             console.log(response?.accessToken);
             console.log(JSON.stringify(response))
             setSuccess(true);
-            // clear input fields if you want to
+            //clear state and controlled inputs
+            //need value attrib on inputs for this
+            setUser('');
+            setPwd('');
+            setMatchPwd('');
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -93,12 +97,8 @@ const Register = () => {
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
                             Username:
-                            <span className={validName ? "valid" : "hide"}>
-                                <FontAwesomeIcon icon={faCheck} />
-                            </span>
-                            <span className={validName || !user ? "hide" : "invalid"}>
-                                <FontAwesomeIcon icon={faTimes} />
-                            </span>
+                            <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
                         </label>
                         <input
                             type="text"
@@ -106,6 +106,7 @@ const Register = () => {
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
+                            value={user}
                             required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
@@ -122,17 +123,14 @@ const Register = () => {
 
                         <label htmlFor="password">
                             Password:
-                            <span className={validPwd ? "valid" : "hide"}>
-                                <FontAwesomeIcon icon={faCheck} />
-                            </span>
-                            <span className={validPwd || !pwd ? "hide" : "invalid"}>
-                                <FontAwesomeIcon icon={faTimes} />
-                            </span>
+                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
                         </label>
                         <input
                             type="password"
                             id="password"
                             onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
                             required
                             aria-invalid={validPwd ? "false" : "true"}
                             aria-describedby="pwdnote"
@@ -149,17 +147,14 @@ const Register = () => {
 
                         <label htmlFor="confirm_pwd">
                             Confirm Password:
-                            <span className={validMatch && matchPwd ? "valid" : "hide"}>
-                                <FontAwesomeIcon icon={faCheck} />
-                            </span>
-                            <span className={validMatch || !matchPwd ? "hide" : "invalid"}>
-                                <FontAwesomeIcon icon={faTimes} />
-                            </span>
+                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
                         </label>
                         <input
                             type="password"
                             id="confirm_pwd"
                             onChange={(e) => setMatchPwd(e.target.value)}
+                            value={matchPwd}
                             required
                             aria-invalid={validMatch ? "false" : "true"}
                             aria-describedby="confirmnote"
